@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grand Library | Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <img
+        src="c:\Users\User\Downloads\WhatsApp Image 2026-10-27 at 13.59.46.jpeg"
+        alt="College Logo"
+        class="college-logo">
+            <h2>Institute of Engineering<br><span>and Management</span></h2>
+        </div>
+
+        <div class="nav-label">MAIN MENU</div>
+        <nav>
+            <a href="#dashboard" class="nav-link active">▦ &nbsp; Dashboard</a>
+            <a href="#books" class="nav-link">▤ &nbsp; All Books</a>
+            <a href="#add-book" class="nav-link">＋ &nbsp; Add New Book</a>
+            <a href="#issue" class="nav-link">↗ &nbsp; Issue a Book</a>
+            <a href="#returns" class="nav-link">↙ &nbsp; Return a Book</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="ornament">❦</div>
+            <p>"A room without books<br>is like a body without a soul."</p>
+            <small>— Cicero</small>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">TUESDAY, OCTOBER 27, 2026</p>
+                <h1 id="page-heading">Library Dashboard</h1>
+            </div>
+            <div class="top-right">
+                <span class="status-dot"></span>
+                <span>Library Open</span>
+                <div class="avatar">GL</div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard">
+            <div class="welcome-banner">
+                <div>
+                    <span class="welcome-tag">✦ YOUR PERSONAL LIBRARY</span>
+                    <h2>Every book has a story.<br><em>Every reader, a journey.</em></h2>
+                    <p>Manage your collection with elegance and ease.</p>
+                    <a href="#books" class="banner-button">Explore Collection →</a>
+                </div>
+                <div class="banner-art">📚</div>
+                <div class="banner-decoration">❦</div>
+            </div>
+
+            <!-- STAT CARDS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Books</span>
+                        <div class="stat-icon green">▤</div>
+                    </div>
+                    <h2 id="total-books">0</h2>
+                    <p>Titles in collection</p>
+                    <div class="stat-line green-line"></div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Available Copies</span>
+                        <div class="stat-icon gold">✓</div>
+                    </div>
+                    <h2 id="available-books">0</h2>
+                    <p>Ready for readers</p>
+                    <div class="stat-line gold-line"></div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Issued Copies</span>
+                        <div class="stat-icon red">↗</div>
+                    </div>
+                    <h2 id="issued-books">0</h2>
+                    <p>Currently on loan</p>
+                    <div class="stat-line red-line"></div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Active Loans</span>
+                        <div class="stat-icon blue">♙</div>
+                    </div>
+                    <h2 id="active-loans">0</h2>
+                    <p>Borrowing records</p>
+                    <div class="stat-line blue-line"></div>
+                </div>
+            </div>
+
+            <!-- CHARTS -->
+            <div class="charts-grid">
+                <div class="panel chart-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="eyebrow">COLLECTION OVERVIEW</p>
+                            <h3>Book Availability</h3>
+                        </div>
+                        <span class="mini-badge">Live Stats</span>
+                    </div>
+                    <div class="chart-wrap">
+                        <canvas id="availabilityChart"></canvas>
+                    </div>
+                    <div class="chart-legend">
+                        <span><i class="legend-dot available-dot"></i> Available</span>
+                        <span><i class="legend-dot issued-dot"></i> Issued</span>
+                    </div>
+                </div>
+
+                <div class="panel chart-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="eyebrow">YOUR COLLECTION</p>
+                            <h3>Books by Category</h3>
+                        </div>
+                    </div>
+                    <div class="chart-wrap">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECENT BOOKS -->
+            <div class="panel recent-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">HANDPICKED FROM THE SHELVES</p>
+                        <h3>Recently Added Books</h3>
+                    </div>
+                    <a href="#books" class="text-link">View All →</a>
+                </div>
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BOOK DETAILS</th>
+                                <th>CATEGORY</th>
+                                <th>BOOK ID</th>
+                                <th>AVAILABILITY</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-books"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ALL BOOKS -->
+        <section id="books" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">THE COMPLETE COLLECTION</p>
+                    <h2>Library Catalogue</h2>
+                    <p>Discover and manage every volume in your collection.</p>
+                </div>
+                <a href="#add-book" class="primary-button">＋ Add Book</a>
+            </div>
+
+            <div class="panel">
+                <div class="toolbar">
+                    <input type="search" id="search-input"
+                        placeholder="Search title, author or book ID...">
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                        <option>Fiction</option>
+                        <option>History</option>
+                        <option>Science</option>
+                        <option>Literature</option>
+                        <option>Philosophy</option>
+                        <option>Reference</option>
+                    </select>
+                </div>
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BOOK DETAILS</th>
+                                <th>AUTHOR</th>
+                                <th>CATEGORY</th>
+                                <th>TOTAL</th>
+                                <th>AVAILABLE</th>
+                                <th>STATUS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="books-table"></tbody>
+                    </table>
+                </div>
+                <p class="table-footer" id="book-count"></p>
+            </div>
+        </section>
+
+        <!-- ADD BOOK -->
+        <section id="add-book" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">GROW YOUR COLLECTION</p>
+                    <h2>Add a New Volume</h2>
+                    <p>Give a new book its place on the shelves.</p>
+                </div>
+            </div>
+
+            <div class="panel form-panel">
+                <form id="add-book-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="book-id">Book ID</label>
+                            <input id="book-id" required placeholder="e.g. BK-108">
+                        </div>
+                        <div class="form-group">
+                            <label for="book-title">Book Title</label>
+                            <input id="book-title" required placeholder="Enter book title">
+                        </div>
+                        <div class="form-group">
+                            <label for="book-author">Author Name</label>
+                            <input id="book-author" required placeholder="Enter author name">
+                        </div>
+                        <div class="form-group">
+                            <label for="book-category">Category</label>
+                            <select id="book-category" required>
+                                <option value="">Select category</option>
+                                <option>Fiction</option>
+                                <option>Romance</option>
+                                <option>Thriller</option>
+                                <option>Murder Mystery</option>
+                                <option>History</option>
+                                <option>Science</option>
+                                <option>Literature</option>
+                                <option>Philosophy</option>
+                                <option>Reference</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="book-quantity">Quantity</label>
+                            <input id="book-quantity" type="number" min="1" required placeholder="Number of copies">
+                        </div>
+                    </div>
+                    <button class="primary-button" type="submit">＋ Add to Collection</button>
+                    <p id="add-message" class="form-message"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- ISSUE BOOK -->
+        <section id="issue" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">LENDING DESK</p>
+                    <h2>Issue a Book</h2>
+                    <p>Record a book borrowed by a student.</p>
+                </div>
+            </div>
+            <div class="panel form-panel">
+                <form id="issue-form">
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="issue-book">Select Book</label>
+                            <select id="issue-book" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="student-name">Student Name</label>
+                            <input id="student-name" required placeholder="Enter student name">
+                        </div>
+                        <div class="form-group">
+                            <label for="issue-date">Issue Date</label>
+                            <input id="issue-date" type="date" required>
+                        </div>
+                    </div>
+                    <button class="primary-button" type="submit">↗ Confirm Issue</button>
+                    <p id="issue-message" class="form-message"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- RETURNS -->
+        <section id="returns" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">LENDING DESK</p>
+                    <h2>Returns & Loan Records</h2>
+                    <p>Track borrowed books and return them to the shelves.</p>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BOOK</th>
+                                <th>STUDENT</th>
+                                <th>ISSUE DATE</th>
+                                <th>STATUS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="loans-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <span>✦ THE GRAND LIBRARY ✦</span>
+            <p>Preserving knowledge, one page at a time.</p>
+        </footer>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
